@@ -1,5 +1,7 @@
 package argentinaprograma.BackEnd.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +11,8 @@ import java.util.Collection;
 import static javax.persistence.FetchType.EAGER;
 
 @Entity
+@Getter
+@Setter
 @Table(name="users")
 public class User implements UserDetails {
     @Id
@@ -24,34 +28,7 @@ public class User implements UserDetails {
     @ManyToOne(fetch = EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id", nullable = false)
     private Role role;
-    public User() {
 
-    }
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
